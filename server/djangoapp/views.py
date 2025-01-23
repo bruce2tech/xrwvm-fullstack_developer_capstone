@@ -15,10 +15,24 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-
+from .restapis import analyze_review_sentiments
+from .restapis import get_request
+from .restapis import post_review
+# import requests
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
+# def get_request(endpoint):
+#     base_url = "https://pbruceresume-3030.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
+#     url = base_url + endpoint
+#     try: 
+#         response = requests.get(url)
+#         response.raise_for_status()
+#         return response.json()
+#     except requests.excecptions.RequestException as e:
+#         logger.error(f"Error while making Get request: {e}")
+#         return {"error": "Failed to fetch data"}
 
 
 # Create your views here.
