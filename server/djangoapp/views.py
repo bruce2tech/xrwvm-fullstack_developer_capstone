@@ -41,13 +41,14 @@ logger = logging.getLogger(__name__)
 def get_cars(request):
     count = CarMake.objects.filter().count()
     print(count)
-    if(count == 0):
+    if (count == 0):
         initiate()
     car_models = CarModel.objects.select_related('car_make')
     cars = []
     for car_model in car_models:
-        cars.append({"CarModel": car_model.name,
-        "CarMake": car_model.car_make.name})
+        cars.append({
+                    "CarModel": car_model.name,
+                    "CarMake": car_model.car_make.name})
     return JsonResponse({"CarModels": cars})
 
 
@@ -76,7 +77,7 @@ def logout_request(request):
 
 @csrf_exempt
 def registration(request):
-    context = {}
+    # context = {}
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
@@ -93,7 +94,7 @@ def registration(request):
         # If not, simply log this is a new user
         logger.debug("{username} is a new user. Exception: \
                     {exception}".format(username=username,
-                    exception=e))
+                        exception=e))
         # If it is a new user
     if not username_exist:
         # Create user in auth_user table
@@ -112,7 +113,8 @@ def registration(request):
         return JsonResponse(data)
 
 
-# Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
+# Update the `get_dealerships` render list of dealerships 
+# all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
     if (state == "All"):
         endpoint = "/fetchDealers"
