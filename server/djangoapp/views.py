@@ -94,7 +94,7 @@ def registration(request):
         # If not, simply log this is a new user
         logger.debug("{username} is a new user. Exception: \
                     {exception}".format(username=username,
-                        exception=e))
+                                        exception=e))
         # If it is a new user
     if not username_exist:
         # Create user in auth_user table
@@ -113,7 +113,7 @@ def registration(request):
         return JsonResponse(data)
 
 
-# Update the `get_dealerships` render list of dealerships 
+# Update the `get_dealerships` render list of dealerships
 # all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
     if (state == "All"):
