@@ -77,7 +77,7 @@ def logout_request(request):
 
 @csrf_exempt
 def registration(request):
-    # context = {}
+    context = {}
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
@@ -85,7 +85,7 @@ def registration(request):
     last_name = data['lastName']
     email = data['email']
     username_exist = False
-    # email_exist = False
+    email_exist = False
     try:
         # Check if user already exists
         User.objects.get(username=username)
