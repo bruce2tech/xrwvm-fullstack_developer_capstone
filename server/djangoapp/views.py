@@ -18,22 +18,21 @@ from .models import CarMake, CarModel
 from .restapis import analyze_review_sentiments
 from .restapis import get_request
 from .restapis import post_review
-# import requests
+import requests
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-# def get_request(endpoint):
-#     base_url = "https://pbruceresume-3030.theiadockernext
-#           -0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
-#     url = base_url + endpoint
-#     try:
-#         response = requests.get(url)
-#         response.raise_for_status()
-#         return response.json()
-#     except requests.excecptions.RequestException as e:
-#         logger.error(f"Error while making Get request: {e}")
-#         return {"error": "Failed to fetch data"}
+def get_request(endpoint):
+    base_url = "https://pbruceresume-3030.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
+    url = base_url + endpoint
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()
+    except requests.excecptions.RequestException as e:
+        logger.error(f"Error while making Get request: {e}")
+        return {"error": "Failed to fetch data"}
 
 
 # Create your views here.
@@ -46,9 +45,7 @@ def get_cars(request):
     car_models = CarModel.objects.select_related('car_make')
     cars = []
     for car_model in car_models:
-        cars.append({
-                    "CarModel": car_model.name,
-                    "CarMake": car_model.car_make.name})
+        cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
     return JsonResponse({"CarModels": cars})
 
 
@@ -92,9 +89,7 @@ def registration(request):
         username_exist = True
     except Exception as e:
         # If not, simply log this is a new user
-        logger.debug("{username} is a new user. Exception: \
-                    {exception}".format(username=username,
-                                        exception=e))
+        logger.debug("{username} is a new user. Exception:{exception}".format(username=username, exception=e))
         # If it is a new user
     if not username_exist:
         # Create user in auth_user table
