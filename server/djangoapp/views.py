@@ -24,7 +24,7 @@ import requests
 logger = logging.getLogger(__name__)
 
 def get_request(endpoint):
-    base_url = "https://pbruceresume-3030.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
+    base_url = "https://pbruceresume-3030.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
     url = base_url + endpoint
     try:
         response = requests.get(url)
